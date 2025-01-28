@@ -2,8 +2,7 @@ version: '3.9'
 
 services:
   app:
+    image: architecture2/devops-for-programmers-project-74:latest
     build:
       context: ./
-      dockerfile: Dockerfile
-    volumes:
-      - "./app:/app"
+      dockerfile: Dockerfile.production
