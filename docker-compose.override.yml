@@ -11,11 +11,9 @@ services:
       ["make", "dev"]
     volumes:
       - ./app:/app
-    depends_on:
-      - db
 
-  webserver:
-    image: caddy:2.6
+  caddy:
+    image: caddy:2.9.1-alpine
     restart: unless-stopped
     ports:
       - "443:443"
@@ -25,23 +23,3 @@ services:
       - "./services/caddy/Caddyfile:/etc/caddy/Caddyfile"
     depends_on:
       - app
-
-  db:
-    image: postgres:17.4
-    restart: always
-    # set shared memory limit when using docker-compose
-    shm_size: 128mb
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: example
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
