@@ -9,3 +9,6 @@ test:
 
 run:
 	docker run -p 8080:8080 -e NODE_ENV=development architecture2/devops-for-programmers-project-74 make dev
+
+generate-env:
+	cp .env.example .env

@@ -13,7 +13,7 @@
 
 ### Setup
 Clone repository, then run command  
-```cp .env.example .env``` for local containers running
+```make generate-env``` for local containers running
 
 ### Run
 - ```make build```
